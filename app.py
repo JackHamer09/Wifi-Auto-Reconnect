@@ -23,7 +23,8 @@ def disconnect():
 def connect():
     print("Connecting to WiFi", settings['wifi_name'])
     winwifi.WinWiFi.connect(settings['wifi_name'])
-    print("Connected to WiFi", settings['wifi_name'])
+    print("Connected to WiFi", settings['wifi_name'], "and waiting 60 seconds to check for internet again.\n")
+    time.sleep(60)
 
 def reconnect():
     disconnect()
@@ -50,6 +51,6 @@ with open('settings.json') as f:
 print("Checking connection on WiFi", settings['wifi_name'], "every", settings['check_internet_interval'], "seconds")
 while True:
     if(is_connected()==False):
-        print("Connection wasn't found at ", datetime.now().strftime("%H:%M:%S"))
+        print("\nConnection wasn't found at ", datetime.now().strftime("%H:%M:%S"))
         reconnect()
     time.sleep(settings['check_internet_interval'])
